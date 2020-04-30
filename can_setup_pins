@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo 'Setting pins P2.09(RX), P2.11(TX)  up for CAN1'
+
+config-pin p2.09 can
+config-pin -q p2.09
+
+
+config-pin p2.11 can
+config-pin -q p2.11
+
+echo 'Now setting up pins P1.28(RX), P1.26(TX) up for CAN0'
+
+config-pin p1.28 can
+config-pin -q p1.28
+
+
+config-pin p1.26 can
+config-pin -q p1.26
+
+echo 'Now setting up can for use'
+
+ip link set can1 up type can bitrate 125000
+ip link set can0 up type can bitrate 125000
+
+ifconfig can1 up
+ifconfig can0 up
+
+echo 'You can now write "cansend can1 123#11.22.33.44.55.66.77.88" to check'
+
+echo 'Made by Blunsdon free for all'
+
+echo '***Script done***'
